@@ -3,6 +3,11 @@ import azure.functions as func
 from pydub import AudioSegment
 import io
 
+# Explicitly tell pydub where to find FFmpeg in the container
+AudioSegment.converter = "/usr/bin/ffmpeg"
+AudioSegment.ffmpeg = "/usr/bin/ffmpeg"
+AudioSegment.ffprobe = "/usr/bin/ffprobe"
+
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger for NormalizeAudio processed a request.')
 
@@ -11,18 +16,14 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         if not file:
             return func.HttpResponse("No audio file found", status_code=400)
 
-        # Load audio file from memory
         sound = AudioSegment.from_file(file)
 
-        # Normalize the sound to a standard -3.0 dBFS
         normalized_sound = sound.normalize(headroom=3.0)
 
-        # Export the processed sound to an in-memory buffer
         buffer = io.BytesIO()
         normalized_sound.export(buffer, format="mp3")
         buffer.seek(0)
 
-        # Return the processed file
         return func.HttpResponse(
             body=buffer.read(),
             mimetype='audio/mpeg',
