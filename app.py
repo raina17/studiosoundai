@@ -5,6 +5,9 @@ import io
 
 app = Flask(__name__)
 CORS(app)
+@app.route("/")
+def hello():
+    return "Flask is running"
 
 # The 'methods=['POST']' part fixes the 405 error
 @app.route('/normalize', methods=['POST'])
