@@ -9,17 +9,20 @@ AudioSegment.ffmpeg = "/usr/bin/ffmpeg"
 AudioSegment.ffprobe = "/usr/bin/ffprobe"
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger for NormalizeAudio processed a request.')
+    logging.info('Pydub Normalize function processed a request.')
 
     try:
         file = req.files.get('audio')
         if not file:
             return func.HttpResponse("No audio file found", status_code=400)
 
+        # Load audio file using pydub
         sound = AudioSegment.from_file(file)
 
+        # Normalize the sound
         normalized_sound = sound.normalize(headroom=3.0)
 
+        # Export as MP3
         buffer = io.BytesIO()
         normalized_sound.export(buffer, format="mp3")
         buffer.seek(0)
@@ -31,7 +34,6 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
                 'Content-Disposition': 'attachment; filename="normalized.mp3"'
             }
         )
-
     except Exception as e:
         logging.error(f"Error processing file: {e}")
         return func.HttpResponse("Error processing audio file.", status_code=500)
