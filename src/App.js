@@ -32,7 +32,7 @@ function App() {
         formData.append('audio', audioFile);
 
         try {
-          const response = await fetch('http://localhost:5000/process-audio', {
+          const response = await fetch('https://app-func-studiosoundai.azurewebsites.net/api/process-audio?', {
             method: 'POST',
             body: formData,
           });
