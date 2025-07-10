@@ -1,0 +1,74 @@
+.uploader-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px 0;
+}
+
+.uploader-box {
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 40px 20px;
+  background-color: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(10px); /* Frosted glass effect */
+}
+
+.uploader-box:hover {
+  border-color: #00ffff; /* Neon cyan */
+  background-color: rgba(0, 255, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 255, 255, 0.2);
+}
+
+.uploader-icon svg {
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.3s ease-in-out;
+}
+
+.uploader-box:hover .uploader-icon svg {
+  color: #00ffff;
+  transform: scale(1.1);
+}
+
+.uploader-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 20px 0 5px 0;
+  color: #ffffff;
+}
+
+.uploader-subtitle {
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.uploader-formats {
+  font-size: 0.8rem;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.uploader-box.drag-accept {
+  border-color: #00e676; /* Green */
+  background-color: rgba(0, 230, 118, 0.1);
+}
+
+.uploader-box.drag-reject {
+  border-color: #ff1744; /* Red */
+  background-color: rgba(255, 23, 68, 0.1);
+}
+
+/* src/components/AudioUploader.css */
+
+@media (max-width: 768px) {
+  .uploader-box {
+    padding: 30px 15px;
+  }
+
+  .uploader-title {
+    font-size: 1.2rem;
+  }
+}
