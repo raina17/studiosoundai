@@ -31,6 +31,3 @@ def normalize_audio():
     except Exception as e:
         return f"Error processing file: {e}", 500
 
-# This part is not needed for deployment but is good for local testing
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
