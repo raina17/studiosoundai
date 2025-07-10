@@ -32,7 +32,7 @@ function App() {
         formData.append('audio', audioFile);
 
         try {
-          const response = await fetch('app-func-normalizeaudio.azurewebsites.net', {
+          const response = await fetch('https://app-func-normalizeaudio.azurewebsites.net/normalize', {
             method: 'POST',
             body: formData,
           });
